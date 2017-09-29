@@ -28,9 +28,11 @@ sed -i "s/hbase.client.host=localhost/hbase.client.host=${HBASE_HOST}/g" /usr/lo
 sed -i "s/hbase.client.port=2181/hbase.client.port=${HBASE_PORT}/g" /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/hbase.properties
 
 
-sed -i "s/jdbc.url=jdbc.*$/jdbc.url=${JDBC_URL}/g" /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/jdbc.properties
-sed -i "s/jdbc.username=.*$/jdbc.username=${JDBC_USERNAME}/g" /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/jdbc.propertie
-sed -i "s/jdbc.password=.*$/jdbc.password=${JDBC_PASSWORD}/g" /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/jdbc.propertie
+
+echo "jdbc.driverClassName=com.mysql.jdbc.Driver" > /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/jdbc.properties
+echo "jdbc.url=${JDBC_URL}" >> /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/jdbc.properties
+echo "jdbc.username=${JDBC_USERNAME}" >> /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/jdbc.properties
+echo "jdbc.password=${JDBC_PASSWORD}" >> /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/jdbc.properties
 
 
 if [ "$DISABLE_DEBUG" == "true" ]; then
