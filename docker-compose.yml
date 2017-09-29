@@ -54,7 +54,7 @@ services:
         pinpoint-web:
           container_name: pinpoint-web
           hostname: web
-          image: dirceusilva/pinpoint-web:1.6.2
+          image: dirceusilva/pinpoint-web:1.6.2v3
           restart: always
           expose:
             - "8080"
@@ -74,6 +74,8 @@ services:
             MYSQL_DATABASE: pinpoint
           depends_on:
               - "pinpoint-mysql"
+              - "pinpoint-collector"
+              - "pinpoint-hbase"
           links:
             - pinpoint-hbase:hbase
             - pinpoint-mysql:mysql
