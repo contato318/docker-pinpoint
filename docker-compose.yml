@@ -1,3 +1,15 @@
+pinpoint-mysql:
+  container_name: pinpoint-mysql
+  restart: always
+  image: mysql:5.7
+  ports:
+    - "13306:3306"
+  environment:
+    - MYSQL_ROOT_PASSWORD=root123
+    - MYSQL_USER=admin
+    - MYSQL_PASSWORD=admin
+    - MYSQL_DATABASE=pinpoint
+
 pinpoint-hbase:
   container_name: pinpoint-hbase
   hostname: hbase
@@ -51,8 +63,13 @@ pinpoint-web:
     CLUSTER_ENABLE: 'false'
     ADMIN_PASSWORD: admin123
     DISABLE_DEBUG: 'true'
+    JDBC_DRIVER: com.mysql.jdbc.Driver
+    JDBC_URL: jdbc:mysql://mysql:3306/pinpoint?characterEncoding=UTF-8
+    JDBC_USERNAME: admin
+    JDBC_PASSWORD: admin
   links:
     - pinpoint-hbase:hbase
+    - pinpoint-mysql:mysql
 
 # only example
 #pinpoint-agent:
