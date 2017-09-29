@@ -54,7 +54,7 @@ services:
         pinpoint-web:
           container_name: pinpoint-web
           hostname: web
-          image: dirceusilva/pinpoint-web:1.6.2v3
+          image: dirceusilva/pinpoint-web:1.6.2v4
           restart: always
           expose:
             - "8080"

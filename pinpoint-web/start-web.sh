@@ -46,7 +46,7 @@ if [ "$DISABLE_ANALYTICS" == "true" ]; then
 fi
 
 
-mysql -h ${MYSQL_HOST} -u ${JDBC_USERNAME} -p\'${JDBC_PASSWORD}\' -D '${MYSQL_DATABASE}' < /root/CreateTableStatement-mysql.sql
-mysql -h ${MYSQL_HOST} -u ${JDBC_USERNAME} -p\'${JDBC_PASSWORD}\' -D '${MYSQL_DATABASE}' < /root/SpringBatchJobRepositorySchema-mysql.sql
+mysql -h ${MYSQL_HOST} -u ${JDBC_USERNAME} -p${JDBC_PASSWORD} -D ${MYSQL_DATABASE} < /root/CreateTableStatement-mysql.sql
+mysql -h ${MYSQL_HOST} -u ${JDBC_USERNAME} -p${JDBC_PASSWORD} -D ${MYSQL_DATABASE} < /root/SpringBatchJobRepositorySchema-mysql.sql
 
 exec /usr/local/tomcat/bin/catalina.sh run
