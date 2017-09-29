@@ -51,7 +51,7 @@ pinpoint-collector:
 pinpoint-web:
   container_name: pinpoint-web
   hostname: web
-  image: dawidmalina/pinpoint-web:1.6.2
+  image: dirceusilva/pinpoint-web
   restart: always
   expose:
     - "8080"
