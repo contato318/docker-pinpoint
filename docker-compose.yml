@@ -67,6 +67,10 @@ pinpoint-web:
     JDBC_URL: jdbc:mysql://mysql:3306/pinpoint?characterEncoding=UTF-8
     JDBC_USERNAME: admin
     JDBC_PASSWORD: admin
+    MYSQL_HOST: mysql
+    MYSQL_DATABASE: pinpoint
+  depends_on:
+      - "pinpoint-mysql"
   links:
     - pinpoint-hbase:hbase
     - pinpoint-mysql:mysql

@@ -7,6 +7,8 @@ FROM tomcat:8-jre8
 ENV PINPOINT_VERSION=1.6.2
 
 ADD start-web.sh /usr/local/bin/
+ADD CreateTableStatement-mysql.sql /root/
+ADD SpringBatchJobRepositorySchema-mysql.sql /root/
 
 RUN chmod a+x /usr/local/bin/start-web.sh \
     && mkdir -p /assets/ \
@@ -17,6 +19,8 @@ RUN chmod a+x /usr/local/bin/start-web.sh \
     && mkdir -p /usr/local/tomcat/webapps \
     && unzip pinpoint-web.war -d /usr/local/tomcat/webapps/ROOT \
     && rm -rf pinpoint-web.war
+
+RUN apt-get update && apt-get install -y mysql-client
 
 EXPOSE 8080
 

@@ -16,6 +16,8 @@ JDBC_DRIVER=${JDBC_DRIVER:-com.mysql.jdbc.Driver}
 JDBC_URL=${JDBC_URL:-jdbc:mysql://mysql:3306/pinpoint?characterEncoding=UTF-8}
 JDBC_USERNAME=${JDBC_USERNAME:-admin}
 JDBC_PASSWORD=${JDBC_PASSWORD:-admin}
+MYSQL_HOST=${MYSQL_HOST=-mysql}
+MYSQL_DATABASE=${MYSQL_DATABASE:-pinpoint}
 
 cp /assets/pinpoint-web.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/pinpoint-web.properties
 cp /assets/hbase.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/hbase.properties
@@ -42,5 +44,9 @@ fi
 if [ "$DISABLE_ANALYTICS" == "true" ]; then
     sed -i 's/config.sendUsage.*/config.sendUsage=false/' /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/pinpoint-web.properties
 fi
+
+
+mysql -h ${MYSQL_HOST} -u ${JDBC_USERNAME} -p'${JDBC_PASSWORD}' -D '${MYSQL_DATABASE}' < /root/CreateTableStatement-mysql.sql
+mysql -h ${MYSQL_HOST} -u ${JDBC_USERNAME} -p'${JDBC_PASSWORD}' -D '${MYSQL_DATABASE}' < /root/SpringBatchJobRepositorySchema-mysql.sql
 
 exec /usr/local/tomcat/bin/catalina.sh run
